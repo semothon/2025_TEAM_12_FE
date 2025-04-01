@@ -68,6 +68,7 @@ export default function useDragScroll(containerRef) {
                 containerRef.current.style.transition = 'none';
             }, 200);
         }
+        isDragging.current = false;
 
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseup', handleMouseUp);

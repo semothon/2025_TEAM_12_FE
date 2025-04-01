@@ -44,7 +44,7 @@ export default function Map({ children }) {
                 overflow: "hidden",
                 width: "100vw",
                 height: "100vh",
-                cursor: isDragging ? "grabbing" : "grab",
+                cursor: isDragging.current ? "grabbing" : "grab",
                 position: "relative",
             }}
             onMouseDown={startDrag}
