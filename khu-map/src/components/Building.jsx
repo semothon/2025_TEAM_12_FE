@@ -2,17 +2,16 @@ import { useEffect, useState } from "react"
 import "../styles/building.css";
 import BuildingDetail from "./BuildingDetail";
 
-export default function Building(props) {
+export default function Building({ src, x, y, postScale, onClick, isSelected }) {
 
     const [size, setSize] = useState({ width: 0, height: 0 });
-    const [isPopupShown, setisPopupShown] = useState(false);
 
     // props: { x: number, y: number, src: string, postScale: number, buildingID: number }
 
     useEffect(
         () => {
             const img = new Image();
-            img.src = props.src;
+            img.src = src;
             img.onload = () => {
                 setSize({
                     width: img.width,
@@ -31,21 +30,22 @@ export default function Building(props) {
 
     const style = {
         position: "absolute",
-        width: size.width * props.postScale + "px",
-        height: size.height * props.postScale + "px",
-        left: props.x * props.postScale + "px",
-        top: props.y * props.postScale + "px",
+        width: size.width * postScale + "px",
+        height: size.height * postScale + "px",
+        left: x * postScale + "px",
+        top: y * postScale + "px",
     }
 
     return (
         <div style={style}>
             <img
                 style={{ width: "100%", height: "100%" }}
-                src={props.src}
+                src={src}
                 className="building"
-                onClick={() => { console.log("clicked") }}
+                onClick={onClick}
+                onMouseDown={(e) => { e.stopPropagation() }}
             />
-            <BuildingDetail />
+            <BuildingDetail hidden={isSelected} />
         </div>
     )
 }

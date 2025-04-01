@@ -6,7 +6,7 @@ export default function Map({ children }) {
     const containerRef = useRef(null);
     const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
     const [baseScale, setBaseScale] = useState(400);
-    const [isSelected, setIsSelected] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(null);
 
     // 이미지 로드 시 실제 크기 가져오기
     useEffect(() => {
@@ -68,8 +68,21 @@ export default function Map({ children }) {
                         userSelect: "none",
                     }}
                     draggable={false}
+                    onClick={() => { setSelectedIndex(null) }}
                 />
-                {React.Children.map(children, child => React.cloneElement(child, { postScale: scale / baseScale }))}
+                {
+                    React.Children.map(
+                        children,
+                        (child, index) => React.cloneElement(
+                            child,
+                            {
+                                postScale: scale / baseScale,
+                                onClick: () => setSelectedIndex(index),
+                                isSelected: selectedIndex === index
+                            }
+                        )
+                    )
+                }
             </div>
         </div>
     );
