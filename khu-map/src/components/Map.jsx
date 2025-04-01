@@ -69,7 +69,7 @@ export default function Map({ children }) {
                     }}
                     draggable={false}
                 />
-                {React.cloneElement(children, { postScale: scale / baseScale })}
+                {React.Children.map(children, child => React.cloneElement(child, { postScale: scale / baseScale }))}
             </div>
         </div>
     );

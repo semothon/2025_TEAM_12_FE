@@ -10,6 +10,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Map>
       <Building x={2000} y={1000} src={placeHolder} />
+      <Building x={3000} y={1000} src={placeHolder} />
     </Map>
   </StrictMode>,
 )
